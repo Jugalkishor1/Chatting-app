@@ -1,0 +1,37 @@
+<div class="container-fluid">
+<%= link_to "Go to home page", users_dashboard_path %>
+
+  <div class="row justify-content-center">
+    <h6 class="mt-4 display-6"> Your friends </h6>
+  </div>
+
+Current user id :-<%= current_user.id %><br>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<div class="container-fluid">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">Profile</th>
+      <th scope="col">Unfriend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <th scope="row"><%= user.id %> </th>
+      <td> <%= user.name %></td>
+      <td> <%= link_to "view Profile", user_path(user.id), method: "get"%></td>
+      <td> <%= link_to "Unfriend", delete_path(@friendship_id), method: "delete"%></td>
+      <td></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+</div>

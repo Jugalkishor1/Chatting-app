@@ -1,0 +1,20 @@
+<h5>Welcome <%= current_user.name %>:- </h5>
+
+<h3> Hello and Welcome </h3> 
+<% if current_user %>
+    <%= link_to "Log out", logout_path, method: "delete"%> 
+<% end %>
+<br>
+<div class="container mt-4 mb-5">
+  <div class="row">
+    <div class="col">
+      <%= button_to "Friends", friends_path, method: :get %>
+    </div>
+    <div class="col">
+      <%= button_to " Add Friends", users_add_friends_path, method: :get %>
+    </div>
+    <div class="col">
+      <%= button_to "Requests", request_path, method: :get %>
+    </div>
+  </div>
+</div>

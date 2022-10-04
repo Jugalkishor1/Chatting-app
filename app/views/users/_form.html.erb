@@ -1,0 +1,32 @@
+<%= form_with model: @user do |form| %>
+<br>
+  <div>
+    <%= form.label :name %><br>
+		<%= form.text_field :name, placeholder: "Enter your Name Here" %>
+     <% @user.errors.full_messages_for(:name).each do |message| %>
+      <div> <%= message %> </div>
+    <% end %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :email %><br>
+		<%= form.text_field :email, placeholder: " Eg: abc@gmail.com" %>
+    <% @user.errors.full_messages_for(:email).each do |message| %>
+      <div> <%= message %> </div>
+    <% end %>
+
+  </div>
+  <br>
+
+  <div>
+    <%= form.label :password %> <br>   
+    <%= form.text_field :password, placeholder: "Enter your Password Here" %>
+    <% @user.errors.full_messages_for(:password).each do |message| %>
+      <div style="color:red"> <%= message %> </div>
+    <% end %>
+  </div>
+  <br>
+    <%= form.submit "Register" %>
+
+  </div>
+<% end %>

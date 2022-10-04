@@ -1,0 +1,23 @@
+<%= form_with url: sessions_path, method: :post do |form| %>
+  <div>
+    <% if flash[:notice] %>
+          <h5 style="color:#df3131"> <%= flash[:notice] %> </h5>
+    <% end %>
+
+    <%= form.label :email %><br>
+		<%= form.text_field :email, placeholder: "Enter your email here" %>
+  </div>
+  <br>
+
+  <div>
+    <% if flash[:alert] %>
+          <p style="color:red"> <%= flash[:alert] %> </p>
+    <% end %>
+    
+    <%= form.label :password %> <br>   
+    <%= form.text_field :password, placeholder: "Enter your Password here" %>
+  </div>
+  <br>
+    <%= form.submit "Log in" %>
+  </div>
+<% end %>

@@ -1,0 +1,30 @@
+<%= link_to "Go to home page", users_dashboard_path %><br>
+current user id :- <%= current_user.id %>
+<div class="container">
+  <div class="row justify-content-center">
+    <h5 class="mt-4 display-5"> All users</h5>
+  </div>
+    <div class="row justify-content-center">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col"> Id </th>
+            <th scope="col">name</th>
+            <th scope="col" colspan="3">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %> </td>
+              <td><%= user.name %> </td>
+              <%= form_tag add_friend_path, method: :post do %>
+                <%= hidden_field_tag :user_id, user.id %>
+                <td> <%= submit_tag "Add friend" %> </td>              
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+</div></h5>
