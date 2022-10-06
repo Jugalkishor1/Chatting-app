@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 		end
 
 		def count
-			@count = User.find(current_user.id).friend_ships.count
+			# @count = User.find(current_user.id).friend_ships.count
+
 		end
 		
 	helper_method :count
