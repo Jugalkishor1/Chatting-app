@@ -11,14 +11,14 @@ class UsersController < ApplicationController
 
   def add_friends
     friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
-    @users = User.where.not(id: friends_ids.pluck(:user_id))  
+    @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten)
 
   end
 
   def friends
     friends = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id).where(status: true)
     @friendship_id = friends.pluck(:id)
-    @users = User.where(id: friends.pluck(:friend_id)).where.not(id: current_user.id)
+    @users = User.where(id: friends.pluck(:friend_id, :user_id).flatten).where.not(id: current_user.id)
   end
 
   def requests
@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     
   def new
     @user = User.new
+    @user.addresses.build
   end
   
   def create
@@ -66,6 +67,6 @@ class UsersController < ApplicationController
   private
     def user_params
       # debugger
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, addresses_attributes: [:id, :Street, :city, :state])
     end
 end

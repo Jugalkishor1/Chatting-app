@@ -1,4 +1,4 @@
-<%= form_with model: @user do |form| %>
+<%= form_for @user do |form| %>
 <br>
   <div>
     <%= form.label :name %><br>
@@ -26,6 +26,22 @@
     <% end %>
   </div>
   <br>
+
+  <div>
+    <%= form.fields_for :addresses do |addresses_form| %>
+        <%= addresses_form.label :street %>
+        <%= addresses_form.text_field :Street %>
+
+        <%= addresses_form.label :city %>
+        <%= addresses_form.text_field :city %>
+
+        <%= addresses_form.label :state %>
+        <%= addresses_form.text_field :state %>
+
+    <% end %>
+  </div>
+  <br>
+
     <%= form.submit "Register" %>
 
   </div>
