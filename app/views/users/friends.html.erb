@@ -10,8 +10,11 @@ Current user id :-<%= current_user.id %><br>
 
 <br>
 <br>
-<br>
-<br>
+<%= form_tag search_path, :method => 'get'  do %>
+   <%= text_field_tag :search, params[:search], placeholder: "Search your friend"%>
+   <%= submit_tag "Search", :name => nil  %>
+ <% end %>
+ <br>
 <div class="container-fluid">
 <table class="table">
   <thead>
@@ -19,19 +22,21 @@ Current user id :-<%= current_user.id %><br>
       <th scope="col">id</th>
       <th scope="col">name</th>
       <th scope="col">Profile</th>
-      <th scope="col">Unfriend</th>
+      <th scope="col">City</th>
+      <th scope="col">Action</th>
+      <!-- <th scope="col">Unfriend</th> -->
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <th scope="row"><%= user.id %> </th>
-      <td> <%= user.name %></td>
-      <td> <%= link_to "view Profile", user_path(user.id), method: "get"%></td>
-      <td> <%= link_to "Unfriend", delete_path(@friendship_id), method: "delete"%></td>
-      <td></td>
+      <% @users.each do |user| %>
+        <tr>
+          <th scope="row"><%= user.id %> </th>
+          <td> <%= user.name %></td>
+          <td> <%= link_to "view Profile", user_path(user.id), method: "get"%></td>
+          <td> <%= user.addresses.last.city%> </td>
+          <td> <%= link_to "Unfriend", delete_path(@friendship_id), method: "delete"%></td>
+        </tr>
       <% end %>
-    </tr>
   </tbody>
 </table>
 </div>

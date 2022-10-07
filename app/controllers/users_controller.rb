@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_login, :except=>[:index, :new, :create]
+
   def index
   end
 
@@ -11,6 +13,7 @@ class UsersController < ApplicationController
 
   def add_friends
     friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
+    #@add  = Address.where(id: friends_ids.pluck(:user_id, :friend_id).flatten)
     @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten)
 
   end
@@ -18,7 +21,12 @@ class UsersController < ApplicationController
   def friends
     friends = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id).where(status: true)
     @friendship_id = friends.pluck(:id)
-    @users = User.where(id: friends.pluck(:friend_id, :user_id).flatten).where.not(id: current_user.id)
+    if params[:search].present?
+      @result = User.where(id: friends.pluck(:friend_id, :user_id).flatten).where.not(id: current_user.id)
+      @users = @result.search(params[:search])
+    else
+      @users = User.where(id: friends.pluck(:friend_id, :user_id).flatten).where.not(id: current_user.id)
+    end
   end
 
   def requests

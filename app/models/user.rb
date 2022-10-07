@@ -7,4 +7,11 @@ class User < ApplicationRecord
 	validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 	validates :password, :length => {:within => 3..20}
 	# scope :all_except, ->(user) { where.not(id: user) }
+	
+	def self.search(search)
+ 		if search
+   		User.joins(:addresses).where(['name LIKE ? OR city LIKE ? OR user_id LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"])
+ 		end
+	end
+	
 end
