@@ -12,28 +12,27 @@ class UsersController < ApplicationController
   end
 
   def add_friends
-    friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
-    #@add  = Address.where(id: friends_ids.pluck(:user_id, :friend_id).flatten)
-    @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten)
-
+    # if params[:search].present?
+    #   friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
+    #   @result = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten)
+    #   @users = @result.search(params[:search])
+    # end
+      
+      friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
+      @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten)
   end
 
   def friends
-    friends = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id).where(status: true)
-    @friendship_id = friends.pluck(:id)
     if params[:search].present?
-      @result = User.where(id: friends.pluck(:friend_id, :user_id).flatten).where.not(id: current_user.id)
-      @users = @result.search(params[:search])
+      @res = FriendShip.where("friend_id IN (:user) OR user_id IN (:user)", {user: current_user.id}).where(status: true).includes(:user, :friend)
+      @users = @res.search(params[:search])      
     else
-      @users = User.where(id: friends.pluck(:friend_id, :user_id).flatten).where.not(id: current_user.id)
+      @users = FriendShip.where("friend_id IN (:user) OR user_id IN (:user)", {user: current_user.id}).where(status: true).includes(:user, :friend)
     end
   end
 
   def requests
-    friends = FriendShip.where(friend_id: current_user.id, status: false)
-    friend_ids = friends.ids
-    @friend_id = friends.pluck(:id)
-    @users = User.where(id: friends.pluck(:user_id))
+    @users = User.includes(:friend_ships).where(friend_ships: { friend_id: current_user.id, status: false })
   end
     
   def new
@@ -53,7 +52,7 @@ class UsersController < ApplicationController
 
   def send_request
     FriendShip.create(user_id: current_user.id, friend_id: params[:user_id], status: false)
-    redirect_to users_dashboard_path
+    redirect_to users_add_friends_path
   end
 
   def accept_request
@@ -64,10 +63,8 @@ class UsersController < ApplicationController
 
   def destroy
     @unfriend = FriendShip.find(params[:id])
-    @unfriend1 = FriendShip.where(user_id: current_user.id, status: true).first
     if @unfriend.present?
       @unfriend.destroy
-      @unfriend1.destroy
     end
     redirect_to friends_path
   end

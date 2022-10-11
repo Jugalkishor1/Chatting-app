@@ -12,20 +12,16 @@
               </div>
               <div class="flex-grow-1 ms-3">
                 <h5 class="mb-1"> <%= @user.name %> </h5>
-                <p class="mb-2 pb-1" style="color: #2b2a2a;"> Indore </p>
+                <p class="mb-2 pb-1" style="color: #2b2a2a;"> <%= @user.addresses.last.city %> </p>
                 <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
                   style="background-color: #efefef;">
                   <div>
                     <p class="small text-muted mb-1">Friends</p>
-                    <p class="mb-0"> <%= count %></p>
-                  </div>
-                  <div class="px-3">
-                    <p class="small text-muted mb-1">Followers</p>
-                    <p class="mb-0"> <%= count %></p>
+                    <p class="mb-0"> <%= total_friends %></p>
                   </div>
                 </div>
                 <div class="d-flex pt-1">
-                  <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                  <!-- <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button> -->
                   <button type="button" class="btn btn-primary flex-grow-1">Add friend</button>
                 </div>
               </div>

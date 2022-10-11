@@ -7,6 +7,12 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+      sup{
+        color: red;
+        font-size: 13px;
+      }
+    </style>
 
     <title> Chat application </title>
   </head>
@@ -24,10 +30,10 @@
         </li>
         <% if current_user %>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/users/friends">Your Friends</a>
+            <a class="nav-link active" aria-current="page" href="/users/friends">Your Friends<sup><%= total_friends %> </sup></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/users/requests">Requests</a>
+            <a class="nav-link active" aria-current="page" href="/users/requests">Requests<sup><%= pending_requests %> </sup></a>
           </li>
         <% else %>
           <li class="nav-item">

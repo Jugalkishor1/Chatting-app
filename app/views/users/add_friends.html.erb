@@ -1,5 +1,13 @@
-<%= link_to "Go to home page", users_dashboard_path %><br>
-current user id :- <%= current_user.id %>
+<div class="container-fluid">
+  <%= link_to "Go to home page", users_dashboard_path %><br>
+  current user id :- <%= current_user.id %>
+
+
+  <%= form_tag search_all_path, :method => 'get'  do %>
+     <%= text_field_tag :search, params[:search], placeholder: "Search your friend"%>
+     <%= submit_tag "Search", :name => nil  %>
+  <% end %>
+</div>
 
 <div class="container">
   <div class="row justify-content-center">
@@ -11,7 +19,6 @@ current user id :- <%= current_user.id %>
           <tr>
             <th scope="col"> Id </th>
             <th scope="col">name</th>
-            <th scope="col"> Locatin </th>
             <th scope="col" colspan="3">Action</th>
           </tr>
         </thead>
@@ -20,7 +27,6 @@ current user id :- <%= current_user.id %>
             <tr>
               <td><%= user.id %> </td>
               <td><%= user.name %> </td>
-              <td>  </td>
               <%= form_tag add_friend_path, method: :post do %>
                 <%= hidden_field_tag :user_id, user.id %>
                 <td> <%= submit_tag "Add friend" %> </td>              
@@ -31,8 +37,3 @@ current user id :- <%= current_user.id %>
       </table>
     </div>
 </div></h5>
-
-
-<% @add.each do |add| %>
-<%= add.city %>
-<% end %>

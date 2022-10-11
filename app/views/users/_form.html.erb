@@ -26,7 +26,7 @@
     <% end %>
   </div>
   <br>
-
+<h5>Address:-</h5>
   <div>
     <%= form.fields_for :addresses do |addresses_form| %>
         <%= addresses_form.label :street %>
@@ -41,8 +41,6 @@
     <% end %>
   </div>
   <br>
-
     <%= form.submit "Register" %>
-
   </div>
 <% end %>

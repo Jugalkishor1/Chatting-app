@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'search', to: 'users#friends'
 
+  get 'search_all', to: 'users#add_friends'
+
   get '/users/dashboard', to: 'users#dashboard'
 
   delete 'logout', to: 'sessions#destroy'
