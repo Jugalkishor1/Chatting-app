@@ -1,0 +1,5 @@
+// $("#user-<%= @user_id %>").remove();
+
+// $('#button-<%#= @user_id %>').html("<%#= 'request_sent' %>");
+
+$("#button-<%= @user_id %>").replaceWith("<%= j render 'users/js_user', user: @user, fr_id: @fr_id %>");
