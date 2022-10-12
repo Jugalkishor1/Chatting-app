@@ -35,13 +35,13 @@ Current user id :-<%= current_user.id %><br>
   </thead>
   <tbody>
       <% @users.each do |userr| %>
-        <tr>
         <% user = userr.user == current_user ? userr.friend : userr.user %>
-          <td id="user-<%= user.id %>"><%= user.id %></td>
+        <tr id="friend-<%= userr.id %>">
+          <td><%= user.id %></td>
           <td><%= user.name %></td>
           <td> <%= link_to "view Profile", user_path(user.id), method: "get"%></td> 
           <td><%= user.addresses.last.city %></td>
-          <td> <%= link_to "Unfriend", delete_path(userr.id), method: "delete"%></td>
+          <td> <%= link_to "Unfriend", delete_path(userr.id), remote: true, method: "delete"%></td>
         </tr>
       <% end %>
   </tbody>

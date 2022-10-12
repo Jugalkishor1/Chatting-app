@@ -16,7 +16,7 @@
   <tbody>
      <% @users.each do |user| %>
     <tr>
-      <th scope="row"> <%= user.id %> </th>
+      <th scope="row" id="user<%= user.id %>"> <%= user.id %> </th>
       <td> <%= user.name %> </td>
       <td><%= link_to "view Profile", user_path(user.id), method: "get"%></td>
       <th scope="row"> <%= user.friend_ships.ids %> </th>
