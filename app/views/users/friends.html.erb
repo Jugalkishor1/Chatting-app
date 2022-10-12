@@ -17,7 +17,7 @@ Current user id :-<%= current_user.id %><br>
 <% end %>
 
 <h6 class="mt-4">
-<%= button_to " Add More Friends", users_add_friends_path, method: :get%>
+<%= button_to " Add More Friends", users_add_friends_path, remote: true, method: :get%>
 </h6>
 </div>
 
