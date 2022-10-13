@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h6 class="mt-4 display-6"> Make new firends </h6>
+  </div>
+    <div class="row justify-content-center">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col"> Id </th>
+            <th scope="col">name</th>
+            <th scope="col" colspan="3">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr id="user-<%= user.id %>">
+              <td><%= user.id %> </td>
+              <td><%= user.name %> </td>
+                <%= form_tag add_friend_path, remote: true, method: :post do %>
+                <%= hidden_field_tag :user_id, user.id %>
+              <td id="button-<%= user.id %>"> <%= submit_tag "Add friend" %> </td>
+                <% end %>
+              <!-- render "users/js_user", user: user %> -->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+</div>

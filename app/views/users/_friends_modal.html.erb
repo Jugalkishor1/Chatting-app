@@ -1,0 +1,38 @@
+<div id="post-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header ml-6">
+        <button type="button" class="close position-absolute top-0 end-0" data-dismiss="modal">&times;</button>
+      </div>
+
+        <h5> My all friends :-</h5>
+      <div>
+        <div class="container-fluid">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">Profile</th>
+                <th scope="col">City</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |userr| %>
+                <% user = userr.user == current_user ? userr.friend : userr.user %>
+                <tr id="friend-<%= userr.id %>">
+                  <td><%= user.id %></td>
+                  <td><%= user.name %></td>
+                  <td> <%= link_to "view Profile", user_path(user.id), method: "get"%></td> 
+                  <td><%= user.addresses.last.city %></td>
+                  <td> <%= link_to "Unfriend", delete_path(userr.id), remote: true, method: "delete"%></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,10 +14,18 @@ class UsersController < ApplicationController
   def add_friends      
     friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
     @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def friends
     @users = FriendShip.where("friend_id IN (:user) OR user_id IN (:user)", {user: current_user.id}).where(status: true).includes(:user, :friend)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def requests

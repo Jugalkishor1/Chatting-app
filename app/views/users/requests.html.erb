@@ -15,12 +15,12 @@
   </thead>
   <tbody>
      <% @users.each do |user| %>
+     <% fr_id = user.friend_ships.first.id %>
     <tr>
       <th scope="row" id="user<%= user.id %>"> <%= user.id %> </th>
       <td> <%= user.name %> </td>
       <td><%= link_to "view Profile", user_path(user.id), method: "get"%></td>
-      <th scope="row"> <%= user.friend_ships.ids %> </th>
-      <!-- <td> link_to "Accept request", accept_request_path(@friend_id), method: "put" %></td> -->
+      <td> <%= link_to "Accept request", accept_request_path(fr_id), method: "put" %></td>
       <% end %>
     </tr>
   </tbody>

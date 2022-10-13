@@ -4,12 +4,16 @@
   <div class="row justify-content-center">
     <h6 class="mt-4 display-6"> Your friends </h6>
   </div>
-
 Current user id :-<%= current_user.id %><br>
+
+<!-- button for modal popup -->
+
+<%= link_to "View all friends", friends_path, id: 'all_friends', :class => "btn", :remote => true, "data-toggle" => "modal" %>
+<!-- end button code -->
+
+
 </div>
 <br>
-<br>
-
 <div class="container-fluid">
 <%= form_tag search_path, :method => 'get'  do %>
    <%= text_field_tag :search, params[:search], placeholder: "Search  from your friends"%>
@@ -21,29 +25,4 @@ Current user id :-<%= current_user.id %><br>
 </h6>
 </div>
 
-<br>
-<div class="container-fluid">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">name</th>
-      <th scope="col">Profile</th>
-      <th scope="col">City</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-      <% @users.each do |userr| %>
-        <% user = userr.user == current_user ? userr.friend : userr.user %>
-        <tr id="friend-<%= userr.id %>">
-          <td><%= user.id %></td>
-          <td><%= user.name %></td>
-          <td> <%= link_to "view Profile", user_path(user.id), method: "get"%></td> 
-          <td><%= user.addresses.last.city %></td>
-          <td> <%= link_to "Unfriend", delete_path(userr.id), remote: true, method: "delete"%></td>
-        </tr>
-      <% end %>
-  </tbody>
-</table>
-</div>
+<div id='post-content'></div>

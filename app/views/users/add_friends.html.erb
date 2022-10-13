@@ -1,3 +1,31 @@
+<!-- ---------------------------------------------------------- -->
+<%= link_to 'hello', users_add_friends_path, id: 'helllo', remote: true, class: 'tooltips', title: '', data: { toggle: 'modal', target: '#exampleModal', keyboard:false, backdrop: "static"} %>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  data-keyboard="false" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"  data-keyboard="false" data-backdrop="static">
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ---------------------------------------------------------- -->
+
 <div class="container-fluid">
   <%= link_to "Go to home page", users_dashboard_path %><br>
   current user id :- <%= current_user.id %>
@@ -6,36 +34,4 @@
      <%= text_field_tag :search, params[:search], placeholder: "Search your friend"%>
      <%= submit_tag "Search", :name => nil  %>
   <% end %>
-</div>
-<br>
-<h6 id="hello">Make new friends :-</h6>
-
-<div class="container">
-  <div class="row justify-content-center">
-    <h5 class="mt-4 display-5"> All users</h5>
-  </div>
-    <div class="row justify-content-center">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col"> Id </th>
-            <th scope="col">name</th>
-            <th scope="col" colspan="3">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @users.each do |user| %>
-            <tr id="user-<%= user.id %>">
-              <td><%= user.id %> </td>
-              <td><%= user.name %> </td>
-                <%= form_tag add_friend_path, remote: true, method: :post do %>
-                <%= hidden_field_tag :user_id, user.id %>
-              <td id="button-<%= user.id %>"> <%= submit_tag "Add friend" %> </td>
-                <% end %>
-              <!-- render "users/js_user", user: user %> -->
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
 </div>
