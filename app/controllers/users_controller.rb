@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def add_friends      
+  def add_friends
     friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
     @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten)
     respond_to do |format|
@@ -67,8 +67,6 @@ class UsersController < ApplicationController
   def destroy
     @fr_id = params[:id]
     @user_id = params[:user_id]
-    #debugger
-    #@friend_id = params[:friend_id]
     @unfriend = FriendShip.find(params[:id])
     if @unfriend.present?
       @unfriend.destroy

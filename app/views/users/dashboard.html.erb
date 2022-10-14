@@ -1,17 +1,29 @@
-<h5>Welcome <%= current_user.name %>:- </h5>
+<div id="post-modal" class="modal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header ml-6">
+      
+      </div>
+    <div id='post-content'></div>
 
-<h3> Hello and Welcome </h3> 
-<% if current_user %>
-    <%= link_to "Log out", logout_path, method: "delete"%> 
-<% end %>
+    <div class="modal-footer">
+    </div>
+    </div>
+  </div>
+</div>
+
+
+<h5>Welcome <%= current_user.name.capitalize %>:- </h5>
+
+<h3> Hello and Welcome </h3>
 <br>
 <div class="container mt-4 mb-5">
   <div class="row">
     <div class="col">
-      <%= button_to "Friends", friends_path, method: :get %>
+      <%= button_to "Friends", friends_path, method: :get, id: 'all_friends', :remote => true, "data-toggle" => "modal" %>
     </div>
     <div class="col">
-      <%= button_to " Add Friends", users_add_friends_path, method: :get %>
+      <%= button_to " Add Friends", users_add_friends_path, method: :get, id: 'all_friends', :remote => true, "data-toggle" => "modal" %>
     </div>
     <div class="col">
       <%= button_to "Requests", request_path, method: :get %>

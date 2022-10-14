@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-center">
-    <h6 class="mt-4 display-6"> Make new firends </h6>
+    <h5 class="mt-3"> Make new friends </h5>
   </div>
     <div class="row justify-content-center">
       <table class="table table-bordered">
@@ -16,10 +16,12 @@
             <tr id="user-<%= user.id %>">
               <td><%= user.id %> </td>
               <td><%= user.name %> </td>
+              <td id="button-<%= user.id %>"> 
                 <%= form_tag add_friend_path, remote: true, method: :post do %>
                 <%= hidden_field_tag :user_id, user.id %>
-              <td id="button-<%= user.id %>"> <%= submit_tag "Add friend" %> </td>
+                <%= submit_tag "Add friend" %> 
                 <% end %>
+              </td>  
               <!-- render "users/js_user", user: user %> -->
             </tr>
           <% end %>
