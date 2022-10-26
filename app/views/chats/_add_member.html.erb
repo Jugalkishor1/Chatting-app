@@ -1,0 +1,23 @@
+<%= form_tag add_member_path, method: :post, id: 'selected_members', class: 'form-horizontal' do %>
+    <table class='table table-bordered'>
+      <thead>
+        <tr>
+          <th style="width:30px;"> Add members to the group </th>
+          <th>Name</th>
+        </tr>
+      </thead>    
+      <tbody>
+         <% @users.each do |userr| %>
+         <% user = userr.user == current_user ? userr.friend : userr.user %>
+          <tr>
+              <td><%=check_box_tag 'selected_members[]', user.id %></td>
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+          </tr>
+        <% end %>
+         <%= content_tag :button, :type => :submit, class: 'btn btn-success' do %>
+          Submit
+        <%end%>
+      </tbody>
+    </table>
+<%end%>

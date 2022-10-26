@@ -1,0 +1,7 @@
+<div class="right-section-bottom">
+  <%= form_tag send_messages_path, remote: true, method: :post do %>
+  <span id="m_body"> <%= text_field_tag :m_body %>  </span>
+  <%= hidden_field_tag :friend_id, @friend_id %>
+  <%= submit_tag "Send" %>
+  <% end %>
+</div>

@@ -1,0 +1,21 @@
+<div class="chat-template">
+  <% @chats.each do |chat| %>
+    <% if chat.sender_id == current_user.id %>
+      <ul>
+        <li class="msg-right">
+          <div class="msg-left-sub msg-desc">
+            <span> <h5> <%= chat.m_body %></h5> </span>
+          </div>
+        </li>
+      </ul>
+    <% else %>
+      <ul>
+        <li class="msg-left">
+          <div class="msg-left-sub msg-desc">
+            <span> <h5> <%= chat.m_body %></h5> </span>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
