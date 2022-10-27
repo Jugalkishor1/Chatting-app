@@ -1,6 +1,11 @@
 class Column < ActiveRecord::Migration[6.1]
   def change
-    remove_column :users, :password_digest
-    add_column :users, :password, :text
+    create_table :users do |t|
+      t.string :name
+      t.string :email
+      t.string :password
+
+      t.timestamps
+    end
   end
 end

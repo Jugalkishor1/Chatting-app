@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_06_074426) do
+ActiveRecord::Schema.define(version: 2022_10_18_082225) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "Street"
     t.string "city"
     t.string "state"
@@ -22,11 +25,27 @@ ActiveRecord::Schema.define(version: 2022_10_06_074426) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string "m_body"
+    t.integer "sender_id"
+    t.integer "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "friendships", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.integer "friend_id"
     t.boolean "status"
     t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.integer "created_by"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "group_type"
+    t.text "grp_members", default: [], array: true
   end
 
   create_table "users", force: :cascade do |t|

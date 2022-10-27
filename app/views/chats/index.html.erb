@@ -1,300 +1,86 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css">
-  </head>
-  <style>
-      .main-section small{
-      font-size: 12px;
-      }
-      .main-section h3, .main-section h5{
-      margin: 0px;
-      }
-      .main-section{
-      width: 960px;
-      background-color: #fff;
-      margin: auto;
-      }
-      .head-section{
-      border-bottom:1px solid #E6E6E6;
-      clear: both;
-      overflow: hidden;
-      width: 100%;
-      }
-      .headLeft-section{
-      width: calc(30% - 1px);
-      float: left;
-      border-right:1px solid #E6E6E6;
-      }
-      .headLeft-sub{
-      padding: 15px;
-      text-align: center;
-      }
-      .headLeft-sub input{
-      width: 60%;
-      border-radius: 0px;
-      border:1px solid #E6E6E6;
-      padding: 7px;
-      }
-      .headLeft-sub button{
-      background: #009EF7;
-      color: #fff;
-      border:1px solid #E6E6E6;
-      padding: 7px 15px;
-      }
-      .headRight-section{
-      width: 70%;
-      float: left;
-      }
-      .headRight-sub{
-      padding: 10px 15px 0px 15px;
-      }
-      .body-section{
-      clear: both;
-      overflow: hidden;
-      width: 100%;
-      }
-      .left-section{
-      width: calc(30% - 1px);
-      float: left;
-      height: 500px;
-      border-right:1px solid #E6E6E6;
-      background-color: #FFF;
-      z-index: 1;
-      position: relative;
-      }
-      .left-section ul{
-      padding: 0px;
-      margin: 0px;
-      list-style: none;
-      }
-      .left-section ul li{
-      padding: 15px 0px;
-      cursor: pointer;
-      }
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css">
+</head>
 
-      .mCustomScrollBox, .mCSB_container{
-      overflow: unset !important;
-      }
-
-      .left-section ul li.active:before{
-      position: absolute;
-      content: '';
-      right: -10px;
-      border:5px solid #009EF7;
-      top: 0px;
-      bottom: 0px;
-      border-radius: 0px 3px 3px 0px;
-      }
-    
-      .left-section .chatList{
-      overflow: hidden;
-      }
-
-      .left-section .chatList .desc{
-      width: calc(100% - 60px);
-      float: left;
-      position: relative;
-      }
-      .left-section .chatList .desc h5{
-      margin-top: 6px;
-      line-height: 5px;
-      }
-
-      .right-section{
-      width: 70%;
-      float: left;
-      height: 500px;
-      background-color: #F6F6F6;
-      position: relative;
-      }
-      .message{
-      height: calc(100% - 68px);
-      font-family: sans-serif;
-      }
-      .message ul{
-      padding: 0px;
-      list-style: none;
-      margin: 0px auto;
-      width: 90%;
-      overflow:hidden;
-      }
-      .message ul li{
-      position: relative;
-      width: 80%;
-      padding: 15px 0px;
-      clear: both;
-      }
-      .message ul li.msg-left{
-      float: left;
-      }
-
-      .message ul li.msg-left .msg-desc{
-      margin-left: 0px;
-      font-size: 12px;
-      background: #cce5ff;
-      padding:5px 10px;
-      border-radius: 5px 5px 5px 0px;
-      position: relative;
-      }
-      .message ul li.msg-left .msg-desc:before{
-      position: absolute;
-      content: '';
-      border:10px solid transparent;
-      border-bottom-color: #E8E8E8;
-      bottom: 0px;
-      left: -10px;
-      }
-      .message ul li.msg-left small{
-      float: right;
-      color: #c1c1c1;
-      }
-      .message ul li.msg-right{
-      float: right;
-      }
-      .message ul li.msg-right img{
-      position: absolute;
-      width: 40px;
-      right: 0px;
-      bottom: 30px;
-      }
-      .message ul li.msg-right .msg-desc{
-      margin-right: 70px;
-      font-size: 12px;
-      background: #cce5ff;
-      color: #004085;
-      padding:5px 10px;
-      border-radius: 5px 5px 5px 0px;
-      position: relative;
-      }
-      .message ul li.msg-right .msg-desc:before{
-      position: absolute;
-      content: '';
-      border:10px solid transparent;
-      border-bottom-color: #cce5ff;
-      bottom: 0px;
-      right: -10px;
-      }
-      .message ul li.msg-right small{
-      float: right;
-      color: #c1c1c1;
-      margin-right: 70px;
-      }
-      .message ul li.msg-day{
-      border-top:1px solid #EBEBEB;
-      width: 100%;
-      padding: 0px;
-      margin: 15px 0px;
-      }
-      .message ul li.msg-day small{
-      position: absolute;
-      top: -10px;
-      background: #F6F6F6;
-      color: #c1c1c1;
-      padding: 3px 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      }
-      .right-section-bottom{
-      background: #fff;
-      width: 100%;
-      padding: 15px;
-      position: absolute;
-      bottom: 0px;
-      border-top:1px solid #E6E6E6;
-      text-align: center;
-      }
-      
-    .create_group{
-      float: right;
-      margin-right: 28px;
-      margin-top: 7px;
-    }
-
-    #m_body{
-      border: groove;
-      border-radius: 20px;
-    }
-
-  </style>
-  <body>
-
-    <div id="post-modal" class="modal" role="dialog">
+<body>
+  <div id="post-modal" class="modal" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header ml-6">
-        
+          
         </div>
-      <div id='post-content'></div>
+        <div id='post-content'></div>
 
-      <div class="modal-footer">
-      </div>
+        <div class="modal-footer">
+        </div>
       </div>
     </div>
+  </div>
+
+  <div class="create_group"> <%= link_to "Create Group", add_member_path, method: :post, id: 'add_members', :remote => true, "data-toggle" => "modal", class: "btn btn-primary" %> </div>
+  
+  <div class="main-section">
+    <div class="head-section">
+      <div class="headLeft-section">
+        <div class="headLeft-sub">
+          <input type="text" name="search" placeholder="Search...">
+          <button> <i class="fa fa-search"></i> </button>
+        </div>
+      </div>
+      <div class="headRight-section">
+        <div class="headRight-sub">
+          <h3 id="message_reciever"> Chat </h3>
+        </div>
+      </div>
     </div>
 
-    <div class="create_group"> <%= link_to "Create Group", add_member_path, method: :post, id: 'add_members', :remote => true, "data-toggle" => "modal", class: "btn btn-primary" %> </div>
-      
-      <div class="main-section">
-        <div class="head-section">
-          <div class="headLeft-section">
-            <div class="headLeft-sub">
-                <input type="text" name="search" placeholder="Search...">
-                <button> <i class="fa fa-search"></i> </button>
+    <div class="body-section">
+      <h5> Groups :-</h5>
+      <div class="left-section mCustomScrollbar" data-mcs-theme="minimal-dark">
+        <ul>
+          <% @groups.each do |group| %>
+          <li>
+            <div class="chatList">
+              <div class="desc">
+                <h5><%= group.name %></h5><br>
+              </div>
+              <div>
+                <%= form_tag show_chats_path, remote: true, method: :post do %>
+                <%= hidden_field_tag :friend_id, group.id %>
+                <%= submit_tag "Chat" %>
+                <% end %>
+              </div>
             </div>
-          </div>
-          <div class="headRight-section">
-            <div class="headRight-sub">
-              <h3 id="message_reciever">Chat </h3>
-            </div>
-          </div>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+
+      <div class="right-section">
+        <div class="message mCustomScrollbar" data-mcs-theme="minimal-dark">
+          <ul id="chatbot">
+            <li class="msg-left">
+              <div class="msg-left-sub">
+                <div class="msg-desc" id="chat">
+                  
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="start_chat">
+          
         </div>
 
-        <div class="body-section">
-          <h5> Groups :-</h5>
-            <div class="left-section mCustomScrollbar" data-mcs-theme="minimal-dark">
-              <ul>
-                  <% @groups.each do |group| %>
-                <li>
-                  <div class="chatList">
-                    <div class="desc">
-                      <h5><%= group.name %></h5><br>
-                    </div>
-                    <div class="img">
-                      <%= form_tag show_chats_path, remote: true, method: :post do %>
-                      <%= hidden_field_tag :friend_id, group.id %>
-                      <%= submit_tag "Chat" %>
-                      <% end %>
-                    </div>
-                  </div>
-                    <% end %>
-                </li>
-              </ul>
-          </div>
-
-          <div class="right-section">
-            <div class="message mCustomScrollbar" data-mcs-theme="minimal-dark">
-              <ul id="chatbot">
-                <li class="msg-left">
-                  <div class="msg-left-sub">
-                    <div class="msg-desc" id="chat">
-                      
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div id="start_chat">
-              
-            </div>
-
-            </div>
-         </div>
       </div>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-      <!-- custom scrollbar plugin -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-   </body>
+    </div>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!-- custom scrollbar plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+</body>
 </html>

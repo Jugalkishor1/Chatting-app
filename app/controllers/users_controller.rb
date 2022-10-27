@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def requests
     @users = User.includes(:friend_ships).where(friend_ships: { friend_id: current_user.id, status: false })
   end
-    
+  
   def new
     @user = User.new
     @user.addresses.build
@@ -52,10 +52,10 @@ class UsersController < ApplicationController
     @user = FriendShip.create(user_id: current_user.id, friend_id: params[:user_id], status: false)
     @user_id = params[:user_id]
     @fr_id = params[:id]
-      respond_to do |format|
-        format.html {redirect_to users_add_friends_path}
-        format.js
-      end
+    respond_to do |format|
+      format.html {redirect_to users_add_friends_path}
+      format.js
+    end
   end
 
   def accept_request
@@ -72,14 +72,14 @@ class UsersController < ApplicationController
       @unfriend.destroy
     end
     respond_to do |format|
-        format.html {redirect_to friends_path}
-        format.js
-      end
+      format.html {redirect_to friends_path}
+      format.js
+    end
   end
 
   private
-    def user_params
+  def user_params
       # debugger
       params.require(:user).permit(:name, :email, :password, addresses_attributes: [:id, :Street, :city, :state])
     end
-end
+  end

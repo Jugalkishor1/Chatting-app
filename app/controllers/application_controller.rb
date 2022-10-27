@@ -1,13 +1,14 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery prepend: true
-		def current_user
-	    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+	def current_user
+			# binding.pry
+			@current_user ||= User.find(session[:user_id]) if session[:user_id]
 		end
 
 		def total_friends
 			friends = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id).where(status: true)
-      @friendship_id = friends.pluck(:id)
-      @users = User.where(id: friends.pluck(:friend_id, :user_id).flatten).where.not(id: current_user.id).count
+			@friendship_id = friends.pluck(:id)
+			@users = User.where(id: friends.pluck(:friend_id, :user_id).flatten).where.not(id: current_user.id).count
 		end
 
 		def pending_requests
@@ -20,10 +21,10 @@ class ApplicationController < ActionController::Base
 			end
 		end
 
-	before_action :require_login
+		before_action :require_login
 
-	helper_method :total_friends
-	helper_method :pending_requests
+		helper_method :total_friends
+		helper_method :pending_requests
 
-	helper_method :current_user
-end
+		helper_method :current_user
+	end

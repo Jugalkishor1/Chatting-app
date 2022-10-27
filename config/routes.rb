@@ -23,7 +23,15 @@ Rails.application.routes.draw do
 
   delete 'delete/:id', to: 'users#destroy', as: :delete
 
+  post 'show_chats', to: 'chats#show_chats'
+
+  post 'send_messages', to: 'chats#send_messages'
+
+  post 'add-member', to: 'chats#add_member'
+
   resources :users
+
+  resources :chats, only: [:index]
 
   resources :sessions, only: [:new, :create, :destroy]
 

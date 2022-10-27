@@ -7,7 +7,6 @@
         <th scope="col">id</th>
         <th scope="col">name</th>
         <th scope="col">Profile</th>
-        <th scope="col">City</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -18,7 +17,7 @@
           <td><%= user.id %></td>
           <td><%= user.name %></td>
           <td> <%= link_to "view Profile", user_path(user.id), method: "get"%></td>
-          <td><%= user.addresses.last.city %></td>
+          <!-- <td> user.addresses.last.city %></td> -->
           <td> <%= link_to "Unfriend", delete_path(userr.id), remote: true, method: "delete"%></td>
         </tr>
       <% end %>
