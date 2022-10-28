@@ -1,21 +1,27 @@
-<%= form_tag add_member_path, method: :post, id: 'selected_members', class: 'form-horizontal' do %>
+<%= form_tag create_group_path, method: :post, id: 'selected_members', class: 'form-horizontal' do %>
+      Group name :- <%= text_field_tag :g_name %>
     <table class='table table-bordered'>
       <thead>
         <tr>
-          <th style="width:30px;"> Add members to the group </th>
+          <th>ID </th>
           <th>Name</th>
+          <th style="width:180px;"> Add members to the group </th>
         </tr>
       </thead>    
       <tbody>
-         <% @users.each do |userr| %>
-         <% user = userr.user == current_user ? userr.friend : userr.user %>
+        <tr>
+          <td> <%= hidden_field_tag 'selected_members[]', current_user.id %> </td>
+        </tr>
+        <% @groups.each do |group| %>
+        <% user = User.find_by(id: (group.grp_members.uniq - [current_user.id.to_s]).first)%>
           <tr>
-              <td><%=check_box_tag 'selected_members[]', user.id %></td>
-              <td><%= user.id %></td>
-              <td><%= user.name %></td>
+              <td> <%= user.id %></td>
+              <td> <%= user.name %> </td>
+              <td> <%= check_box_tag 'selected_members[]', user.id %></td>
           </tr>
-        <% end %>
-         <%= content_tag :button, :type => :submit, class: 'btn btn-success' do %>
+        <% end %> 
+
+        <%= content_tag :button, :type => :submit, class: 'btn btn-success group_create_button' do %>
           Submit
         <%end%>
       </tbody>

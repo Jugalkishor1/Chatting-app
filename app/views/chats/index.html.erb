@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="create_group"> <%= link_to "Create Group", add_member_path, method: :post, id: 'add_members', :remote => true, "data-toggle" => "modal", class: "btn btn-primary" %> </div>
+  <div class="create_group"> <%= link_to "Create Group", chats_path, method: :get, id: 'add_members', :remote => true, "data-toggle" => "modal", class: "btn btn-primary" %> </div>
   
   <div class="main-section">
     <div class="head-section">
@@ -39,19 +39,19 @@
     </div>
 
     <div class="body-section">
-      <h5> Groups :-</h5>
       <div class="left-section mCustomScrollbar" data-mcs-theme="minimal-dark">
+      <h5> Recent chats :-</h5>
         <ul>
           <% @groups.each do |group| %>
           <li>
             <div class="chatList">
               <div class="desc">
-                <h5><%= group.name %></h5><br>
+                <h5><%= head_name = group.group_type == "group" ? group.g_name : get_chat_name(group.grp_members - [current_user.id.to_s]) %> </h5><br>
               </div>
               <div>
                 <%= form_tag show_chats_path, remote: true, method: :post do %>
-                <%= hidden_field_tag :friend_id, group.id %>
-                <%= submit_tag "Chat" %>
+                  <%= hidden_field_tag :group_id, group.id %>
+                  <%= submit_tag "Chat" %>
                 <% end %>
               </div>
             </div>

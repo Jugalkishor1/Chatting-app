@@ -1,4 +1,4 @@
-$("#chatbot").html("<%= escape_javascript render 'chat'%>");
+$("#chatbot").html("<%= escape_javascript render 'chat', group: @group %>");
 $("#start_chat").html("<%= escape_javascript render 'start_chat' %>");
 
-$("#message_reciever").html("<%= @message_reciever.name %>");
+$(".headRight-section #message_reciever").html("<%= @group_name %>");

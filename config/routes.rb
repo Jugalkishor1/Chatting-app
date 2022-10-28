@@ -26,8 +26,10 @@ Rails.application.routes.draw do
   post 'show_chats', to: 'chats#show_chats'
 
   post 'send_messages', to: 'chats#send_messages'
-
-  post 'add-member', to: 'chats#add_member'
+  
+  post 'create_group', to: 'chats#create_group'
+  
+  post 'group_chats', to: 'chats#group_chats'
 
   resources :users
 

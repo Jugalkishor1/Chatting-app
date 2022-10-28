@@ -16,7 +16,8 @@ class FriendShip < ApplicationRecord
 
 	private
 	def create_group
-		@group = Group.find_or_create_by(created_by: self.user.id, grp_members: [self.user.id , self.friend_id])
+		@group = Group.find_or_create_by(created_by: self.user.id, group_type: "personal",
+			grp_members: [self.user.id , self.friend_id], g_name: "nothing")
 	end
 
 end
