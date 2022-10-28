@@ -7,19 +7,8 @@
 </head>
 
 <body>
-  <div id="post-modal" class="modal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header ml-6">
-          
-        </div>
-        <div id='post-content'></div>
-
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
+  
+  <%= render "modal_popup" %>
 
   <div class="create_group"> <%= link_to "Create Group", chats_path, method: :get, id: 'add_members', :remote => true, "data-toggle" => "modal", class: "btn btn-primary" %> </div>
   
@@ -55,7 +44,7 @@
                 <% end %>
               </div>
             </div>
-            <% end %>
+          <% end %>
           </li>
         </ul>
       </div>

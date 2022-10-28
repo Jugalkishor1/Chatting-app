@@ -1,6 +1,9 @@
 class ChatsController < ApplicationController
   def index
     @groups = Group.where("grp_members @> ?", "{#{current_user.id}}")
+
+    user_ids = @groups.pluck(:grp_members).flatten.map(&:to_i)
+    @users = User.where(id: user_ids).where.not(id: current_user.id)
   end
 
   def create_group
