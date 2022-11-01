@@ -31,7 +31,11 @@ Rails.application.routes.draw do
   
   post 'group_chats', to: 'chats#group_chats'
 
+  get 'profile', to: 'posts#profile'
+
   resources :users
+
+  resources :posts
 
   resources :chats, only: [:index]
 

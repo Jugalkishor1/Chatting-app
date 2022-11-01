@@ -1,0 +1,9 @@
+<%= form_with(model: @post, scope: :post, method: :post) do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.rich_text_area :content, placeholder: "what's on your mind" %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
