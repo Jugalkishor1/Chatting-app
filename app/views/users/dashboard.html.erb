@@ -8,10 +8,10 @@
 <div class="container mt-4 mb-5">
   <div class="row">
     <div class="col">
-      <%= button_to "Friends", friends_path, method: :get, id: 'all_friends', :remote => true, "data-toggle" => "modal" %>
+      <%= button_to "Friends", friends_path, method: :get, id: 'all_friends', :remote => true, "data-toggle" => "modal", "data-target" => ".modal" %>
     </div>
     <div class="col">
-      <%= button_to " Add Friends", users_add_friends_path, method: :get, id: 'all_friends', :remote => true, "data-toggle" => "modal" %>
+      <%= button_to " Add Friends", users_add_friends_path, method: :get, id: 'all_friends', :remote => true, "data-toggle" => "modal", "data-target" => "#post-modal" %>
     </div>
     <div class="col">
       <%= button_to "Requests", request_path, method: :get %>
@@ -25,5 +25,41 @@
 
 
 <div class="container">
-<%= button_to " Add post", posts_path, method: :get, :remote => true, "data-toggle" => "modal" %>
+<%= button_to " Add post", posts_path, method: :get, :remote => true, "data-toggle" => "modal",  "data-target" => "#post-modal" %>
+</div>
+<br>
+<div class="container">
+<%= button_to " view your profile", profile_path, method: :get %>
+</div>
+
+
+
+<div class="card ml-5" style="width: 48rem">
+  <div class="border border-left border-right px-0">
+    <div>
+        <% @posts.each do |post| %>
+      <div>
+        <div class="d-flex p-3 border-bottom">
+          <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (24).webp" class="rounded-circle"
+            height="50" alt="Avatar" loading="lazy" /> -->
+          <div class="d-flex w-100 ps-3">
+            <div>
+              <a href="">
+                <h6 class="text-body">
+                  <%= User.find_by(id: post.user_id).name.capitalize %>
+                  <span class="small text-muted font-weight-normal"><%= post.created_at.strftime("%d/%m/%Y") %></span>
+                </h6>
+              </a>
+              <p style="line-height: 1.2;">
+                <%= post.content %>
+              </p>
+              <!-- <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
+                class="img-fluid rounded mb-3" alt="Fissure in Sandstone" /> -->
+            </div>
+          </div>
+        </div>
+      </div>
+            <% end %>
+    </div>
+  </div>
 </div>

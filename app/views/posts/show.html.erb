@@ -1,25 +1,2 @@
-  <!-- <p id="notice">  notice %></p> -->
-  <p>
-    <strong>Title:</strong>
-  </p>
-  <p>
-    <strong>Content:</strong>
-  </p>
-  <!-- <p id="notice"> notice %></p> -->
-  <h1>Posts</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Content</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-  <tbody>
-      <% @posts.each do |post| %>
-        <tr>
-          <td style="margin-left: 20px;"><%= post.content %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<%= @post.content %>
+<%= link_to "Edit", edit_post_path(@post) %>
