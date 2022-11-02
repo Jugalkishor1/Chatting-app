@@ -3,6 +3,11 @@
 <%= current_user.id %><br>
 <%= current_user.name %><br>
 
+<% flash.each do |type, msg| %>
+  <div class="register-flash">
+    <%= msg %>
+  </div>
+<% end %>
 
 <table class="table">
   <thead>

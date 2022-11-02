@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
+    @posts = Post.where(user_id: my_friends)
   end
 
   def show
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
 
   def add_friends
     friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
-    @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten)
+    @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten).where.not(id: current_user.id)
     respond_to do |format|
       format.html
       format.js
@@ -40,15 +41,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      respond_to do |format|
-        format.html {redirect_to new_session_path}
-        format.js
-      end
+      flash.now[:success] = "U have successsfully submitted the form"
+      redirect_to new_session_path
+    else
+      render "new"
     end
   end
 
   def send_request
-    # debugger
     @user = FriendShip.create(user_id: current_user.id, friend_id: params[:user_id], status: false)
     @user_id = params[:user_id]
     @fr_id = params[:id]
@@ -61,6 +61,7 @@ class UsersController < ApplicationController
   def accept_request
     @friendship = FriendShip.find(params[:id])
     @friendship.update(status: true)
+    flash.keep[:notice] = "Friend Request accepted"
     redirect_to request_path
   end
 
@@ -79,7 +80,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-      # debugger
-      params.require(:user).permit(:name, :email, :password, addresses_attributes: [:id, :Street, :city, :state])
-    end
+    # debugger
+    params.require(:user).permit(:name, :email, :password, addresses_attributes: [:id, :Street, :city, :state])
   end
+end
