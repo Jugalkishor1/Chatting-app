@@ -4,7 +4,11 @@
       <ul>
         <li class="msg-right">
           <div class="msg-left-sub msg-desc">
-            <span> <h5> <%= chat.m_body %></h5> </span>
+            <span> <h5> <%= chat.m_body %> </h5>
+              <span class="time"> <%= (Time.now.to_date - chat.created_at.to_date).to_i %>  days ago 
+              </span>
+              <h4 class="sender_name"><%= current_user.name.capitalize%></h4> 
+            </span>
           </div>
         </li>
       </ul>
@@ -12,7 +16,11 @@
       <ul>
         <li class="msg-left">
           <div class="msg-left-sub msg-desc">
-            <span> <h5> <%= chat.m_body %></h5> </span>
+            <span> <h5> <%= chat.m_body %> </h5>
+              <span class="time"> <%= (Time.now.to_date - chat.created_at.to_date).to_i %>  days ago 
+              </span>
+              <h4 class="sender_name"><%= @group_name %></h4> 
+            </span>
           </div>
         </li>
       </ul>
