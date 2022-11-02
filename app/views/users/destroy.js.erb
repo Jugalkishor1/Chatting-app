@@ -1,6 +1,7 @@
-// $("#undo-<%= @fr_id %>").replaceWith("hello");
-
-// $("#undo-<%= @fr_id %>").replaceWith("#button-<%=@user_id %>");
 $("#undo-<%= @fr_id %>").replaceWith("<%= j render 'users/add_friend_form', user: @user, fr_id: @fr_id %>");
 
 $("tr#friend-<%= @fr_id %>").remove();
+
+$("tr#Request<%= @fr_id %>").remove();
+
+

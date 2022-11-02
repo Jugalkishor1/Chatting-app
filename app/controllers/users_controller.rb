@@ -30,7 +30,9 @@ class UsersController < ApplicationController
   end
 
   def requests
-    @users = User.includes(:friend_ships).where(friend_ships: { friend_id: current_user.id, status: false })
+    @recieved_requests = User.includes(:friend_ships).where(friend_ships: {friend_id: current_user.id, status: false })
+    
+    @send_requests = FriendShip.where(user_id: current_user.id).where(status: false).includes(:user, :friend)
   end
   
   def new

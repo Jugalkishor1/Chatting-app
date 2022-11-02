@@ -1,32 +1,88 @@
-<h5>Friend Requests :- </h5>
+<div class="container-fluid">
+  <h5 class="mx-5">Friend Requests :- </h5>
 
-<%= current_user.id %><br>
-<%= current_user.name %><br>
+  <% flash.each do |type, msg| %>
+    <div class="register-flash">
+      <%= msg %>
+    </div>
+  <% end %>
 
-<% flash.each do |type, msg| %>
-  <div class="register-flash">
-    <%= msg %>
-  </div>
-<% end %>
+  <section class="recieved-requests">
+    <div class="h-100">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body p-0">
+                  <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 200px">
+                    <table class="table table-striped mb-0">
+                      <thead style="background-color: black;">
+                        <tr style="color: white">
+                          <th scope="col"> Id </th>
+                          <th scope="col"> Name</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <% @recieved_requests.each do |user| %>
+                      <% fr_id = user.friend_ships.first.id %>
+                        <tr>
+                          <td id="user<%= user.id %>" ><%= user.id %></td>
+                          <td><%= user.name %> </td>
+                          <td><%= link_to "Accept", accept_request_path(fr_id), method: "put", class: "btn btn-success" %> </td>
+                        <% end %>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">name</th>
-      <th scope="col">Profile</th>
-      <th scope="col"> Action</th>
-    </tr>
-  </thead>
-  <tbody>
-     <% @users.each do |user| %>
-     <% fr_id = user.friend_ships.first.id %>
-    <tr>
-      <th scope="row" id="user<%= user.id %>"> <%= user.id %> </th>
-      <td> <%= user.name %> </td>
-      <td><%= link_to "view Profile", user_path(user.id), method: "get", class: "link" %></td>
-      <td> <%= link_to "Accept request", accept_request_path(fr_id), method: "put",class: "link" %></td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+<br>
+<div class="container-fluid">
+  <h5 class="mx-5">Requests that u have sent =  <span class="text-danger"> <%= sent_requests %> </span></h5>
+  <section class="sent-requests">
+    <div class="h-100">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body p-0">
+                  <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; height: 200px">
+                    <table class="table table-striped mb-0">
+                      <thead style="background-color: black;">
+                        <tr style="color: white">
+                          <th scope="col"> Id </th>
+                          <th scope="col"> Name</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <% @send_requests.each do |user| %>
+                        <tr id="Request<%= user.id %>">
+                          <td id="user<%= user.friend.id %>" ><%= user.friend.id %></td>
+                          <td><%= user.friend.name %> </td>
+                          <td><%= link_to "Undo", delete_path(user.id), remote: true, method: "delete", class: "btn btn-primary" %> </td>
+                        <% end %>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
