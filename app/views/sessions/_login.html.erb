@@ -1,9 +1,5 @@
 <%= form_with url: sessions_path, method: :post do |form| %>
   <div>
-    <% if flash[:notice] %>
-          <h5 style="color:#df3131"> <%= flash[:notice] %> </h5>
-    <% end %>
-
     <%= form.label :email %><br>
 		<%= form.text_field :email, placeholder: "Enter your email here" %>
   </div>
