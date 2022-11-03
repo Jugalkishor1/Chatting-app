@@ -1,4 +1,4 @@
-<%= form_with(model: @post, scope: :post, method: :post) do |form| %>
+<%= form_with(model: @post, scope: :post) do |form| %>
   <div class="field">
     <%= form.label :content %>
     <%= form.rich_text_area :content, placeholder: "what's on your mind" %>

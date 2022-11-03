@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'users#index'
+  root 'sessions#new'
 
   get 'search', to: 'users#friends'
 

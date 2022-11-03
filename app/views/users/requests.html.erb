@@ -21,7 +21,8 @@
                         <tr style="color: white">
                           <th scope="col"> Id </th>
                           <th scope="col"> Name</th>
-                          <th scope="col">Action</th>
+                          <th scope="col">Accept</th>
+                          <th scope="col">Delete</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -31,6 +32,7 @@
                           <td id="user<%= user.id %>" ><%= user.id %></td>
                           <td><%= user.name %> </td>
                           <td><%= link_to "Accept", accept_request_path(fr_id), method: "put", class: "btn btn-success" %> </td>
+                          <td><%= link_to "Delete", delete_path(fr_id), remote: true, method: "delete", class: "btn btn-danger" %> </td>
                         <% end %>
                         </tr>
                       </tbody>

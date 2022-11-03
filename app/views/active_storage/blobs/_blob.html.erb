@@ -8,7 +8,7 @@
       <%= caption %>
     <% else %>
       <span class="attachment__name"><%= blob.filename %></span>
-      <!-- <span class="attachment__size"> number_to_human_size blob.byte_size %></span> -->
+      <span class="attachment__size"><%= (Time.now.to_date - blob.created_at.to_date).to_i %> days ago</span>
     <% end %>
   </figcaption>
 </figure>
