@@ -5,7 +5,10 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @posts = Post.where(user_id: my_friends)
+    friends = FriendShip.where("friend_id IN (:user) OR user_id IN (:user)",
+      {user: current_user.id}).where(status: true).includes(:user, :friend)
+    friends_ids = friends.pluck(:friend_id, :user_id).flatten - [current_user.id]
+    @posts = Post.where(user_id: friends_ids)
   end
 
   def show
@@ -14,7 +17,7 @@ class UsersController < ApplicationController
 
   def add_friends
     friends_ids = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id)
-    @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten).where.not(id: current_user.id)
+    @users = User.where.not(id: friends_ids.pluck(:user_id, :friend_id).flatten).all_except(current_user)
     respond_to do |format|
       format.html
       format.js
