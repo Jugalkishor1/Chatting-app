@@ -39,11 +39,15 @@ Rails.application.routes.draw do
 
   post 'reply_comment', to: 'comments#reply_comment'
 
+  get 'like_count', to: 'likes#like_count'
+
   resources :users
 
   resources :posts
 
-  resources :comments
+  resources :comments, only: [:create]
+
+  resources :likes
 
   resources :chats, only: [:index]
 

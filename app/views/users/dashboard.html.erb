@@ -53,7 +53,16 @@
                 </h6>
               </a>
               <p style="line-height: 1.2;">
-                <%= post.content %>
+                <p> <%= post.content %> 
+                  <spam style="float: right;" id="like"> 
+                    <%= form_tag likes_path, remote: true, method: :post do %>
+                    <%= hidden_field_tag :post_id, post.id %>
+                    <%= hidden_field_tag :'user_id[]', current_user.id %>
+                    <%= hidden_field_tag :current_user_id, current_user.id %>
+                    <%= submit_tag "Like" %>
+                    <% end %>
+                  </spam>
+                </p>
                   <h5 id="<%= post.user.id %>">  </h5>
                   
                   <div class="new_Comment">

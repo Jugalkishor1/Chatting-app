@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_03_064926) do
+ActiveRecord::Schema.define(version: 2022_11_05_054809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,13 @@ ActiveRecord::Schema.define(version: 2022_11_03_064926) do
     t.string "group_type"
     t.text "grp_members", default: [], array: true
     t.string "g_name"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "post_id"
+    t.text "user_id", default: [], array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", force: :cascade do |t|
