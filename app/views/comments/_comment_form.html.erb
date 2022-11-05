@@ -1,0 +1,6 @@
+<%= form_tag comments_path, remote: true, method: :post do %>
+<%= text_field_tag :comment %>
+<%= hidden_field_tag :post_id, post.id %>
+<%= hidden_field_tag :user_id, current_user.id %>
+<%= submit_tag "Comment" %>
+<% end %>

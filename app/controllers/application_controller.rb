@@ -25,14 +25,7 @@ class ApplicationController < ActionController::Base
 		end
 	end
 	
-	def my_friends
-		friends = FriendShip.where("friend_id IN (:user) OR user_id IN (:user)", {user: current_user.id}).where(status: true).includes(:user, :friend)
-  	friends_ids = friends.pluck(:friend_id, :user_id).flatten - [current_user.id]
-	end	
-	
 	before_action :require_login
-
-	helper_method :my_friends
 
 	helper_method :total_friends
 	helper_method :pending_requests

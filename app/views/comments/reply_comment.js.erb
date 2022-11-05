@@ -1,0 +1,4 @@
+ // binding.pry %>
+$("#reply-<%= @comment.parent_comment_id %>").append("<%= @comment.comment %>")
+$('#comment').val('')
+

@@ -1,0 +1,2 @@
+$('#comment-<%= @comment.id %>').html("<%= j render 'comments/reply_form', comment: @comment %>");
+$('#comment').val('')

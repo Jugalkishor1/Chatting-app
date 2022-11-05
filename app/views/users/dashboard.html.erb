@@ -23,17 +23,19 @@
   </div>
 </div>
 
-
 <div class="container">
-<%= button_to " Add post", posts_path, method: :get, :remote => true, "data-toggle" => "modal",  "data-target" => "#post-modal" %>
+  <div class="row">
+    <div class="col">
+      <%= button_to " Add post", posts_path, method: :get, :remote => true, "data-toggle" => "modal",  "data-target" => "#post-modal" %>
+    </div>
+    <div class="col-9">
+      <%= button_to " view your profile", profile_path, method: :get %>
+    </div>
+  </div>
 </div>
-<br>
-<div class="container">
-<%= button_to " view your profile", profile_path, method: :get %>
-</div>
 
 
-
+<div class="container mt-5">
 <div class="card ml-5" style="width: 48rem">
   <div class="border border-left border-right px-0">
     <div>
@@ -52,10 +54,32 @@
               </a>
               <p style="line-height: 1.2;">
                 <%= post.content %>
+                  <h5 id="<%= post.user.id %>">  </h5>
+                  
+                  <div class="new_Comment">
+                    <div class="new_comment">
+                      
+                    </div>
+                  </div>
+                <%= form_tag comments_path, remote: true, method: :get do %>
+                <%= hidden_field_tag :post_id, post.id %>
+                <%= hidden_field_tag :user_id, post.user.id %>
+                <%= submit_tag "View comments" %>
+                <% end %>
               </p>
-              <!-- <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/184.webp"
-                class="img-fluid rounded mb-3" alt="Fissure in Sandstone" /> -->
-            </div>
+
+              <!-- commnet section -->
+                  <div class="card my-1">
+                    <div class="card-body">
+                      <p class="font-weight-bold">Comments</p>
+                        <div class="form-group">
+                        </div>
+                      
+                      <%= render "comments/comment_form" , post: post, comment: @comment%>
+
+                    </div>
+                  </div>
+              </div>
           </div>
         </div>
       </div>

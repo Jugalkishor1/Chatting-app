@@ -33,9 +33,17 @@ Rails.application.routes.draw do
 
   get 'profile', to: 'posts#profile'
 
+  get 'comments', to: 'comments#show_comments'
+
+  get 'reply_form', to: 'comments#reply_form'
+
+  post 'reply_comment', to: 'comments#reply_comment'
+
   resources :users
 
   resources :posts
+
+  resources :comments
 
   resources :chats, only: [:index]
 

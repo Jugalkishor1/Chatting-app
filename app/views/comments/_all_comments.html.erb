@@ -1,0 +1,23 @@
+<% @comments.each do |comment| %>
+<ul>
+  <li> <%= comment.comment %> </li>
+  <p class="text-primary"> By: <%= comment.user.name %></p>
+
+  <% @replies = comment.replies %>
+  <p class="mx-3 my-1"> All replies</p>
+  <% @replies.each do |reply| %>
+  <ul class="mx-5 text-danger">
+    <li> <%= reply.comment %> </li>
+  </ul>
+  <% end %>
+
+  <div id="reply-<%= comment.id %>" class="mx-5 text-danger"> </div>
+
+  <div id="comment-<%= comment.id %>">    
+    <%= form_tag reply_form_path, remote: true, method: :get do %>
+    <%= hidden_field_tag :comment_id, comment.id %>
+    <%= submit_tag "reply" %>
+    <% end %>
+  </div>
+</ul>
+<% end %>
