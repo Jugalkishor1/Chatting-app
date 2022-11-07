@@ -1,1 +1,1 @@
-$("#like").html("liked <%= @likes %>");
+$("#<%= @post.post_id %>").replaceWith("<%= j render 'unlike', post: @post %>");

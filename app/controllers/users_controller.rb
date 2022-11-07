@@ -9,6 +9,8 @@ class UsersController < ApplicationController
       {user: current_user.id}).where(status: true).includes(:user, :friend)
     friends_ids = friends.pluck(:friend_id, :user_id).flatten - [current_user.id]
     @posts = Post.where(user_id: friends_ids)
+    
+    # @like_count = Like.find_by(post_id: 9).user_id.count
   end
 
   def show

@@ -4,6 +4,7 @@ class User < ApplicationRecord
 	has_many :friend_ships
 	has_many :posts
 	has_many :comments
+	has_one :like
 
 	accepts_nested_attributes_for :addresses
 	

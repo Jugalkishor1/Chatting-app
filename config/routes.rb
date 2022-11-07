@@ -39,7 +39,9 @@ Rails.application.routes.draw do
 
   post 'reply_comment', to: 'comments#reply_comment'
 
-  get 'like_count', to: 'likes#like_count'
+  put 'unlike_post', to: 'likes#unlike_post'
+  
+  patch 'unlike_post', to: 'likes#unlike_post'
 
   resources :users
 
