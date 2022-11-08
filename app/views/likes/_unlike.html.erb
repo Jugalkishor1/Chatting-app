@@ -1,1 +1,4 @@
-<%= link_to "Unlike", unlike_post_path(post_id: @post.post_id), remote: true, method: :patch %>
+<div class="float-lg-center edit-button">
+	<i class="bi bi-hand-thumbs-up-fill"></i>
+	<%= link_to "Unlike", unlike_post_path(post_id: @post.post_id), remote: true, method: :patch %>
+</div>
