@@ -33,15 +33,17 @@ class ChatsController < ApplicationController
   end
 
   def send_messages
-    @message = Chat.create(m_body: params[:m_body],
+      @message = Chat.create(m_body: params[:m_body],
       sender_id: current_user.id,
       group_id:params[:group_id]
     )
-
-    respond_to do |format|
-      format.html {redirect_to chats_path}
-      format.js
-    end
+    message = @message
+    group_id = @message.group_id 
+    
+    ActionCable.server.broadcast("message_channel_#{group_id}", {message: message.as_json})
+      respond_to do |format|
+        format.js {SendMessageJob.perform_later(message)}
+      end
   end
 
   private
@@ -55,7 +57,7 @@ class ChatsController < ApplicationController
   end
 
   def message_params
-      params.require(:chat).permit(:m_body)
-      params.require(:group).permit(:g_name)
+    params.require(:chat).permit(:m_body)
+    params.require(:group).permit(:g_name)
   end
 end

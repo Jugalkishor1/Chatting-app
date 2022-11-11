@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.css">
-</head>
-
-<body>
-  
   <%= render "modal_popup" %>
 
   <div class="create_group"> <%= link_to "Create Group", chats_path, method: :get, id: 'add_members', :remote => true, "data-toggle" => "modal", class: "btn btn-primary" %> </div>
@@ -17,7 +7,8 @@
       <div class="headLeft-section">
         <div class="headLeft-sub">
           <input type="text" name="search" placeholder="Search...">
-          <button> <i class="fa fa-search"></i> </button>
+          <button> <i class="fa fa-search"></i> 
+          </button>
         </div>
       </div>
       <div class="headRight-section">
@@ -29,7 +20,7 @@
 
     <div class="body-section">
       <div class="left-section mCustomScrollbar" data-mcs-theme="minimal-dark">
-      <h5> Recent chats :-</h5>
+        <h5> Recent chats :-</h5>
         <ul>
           <% @groups.each do |group| %>
           <li>
@@ -39,37 +30,31 @@
               </div>
               <div>
                 <%= form_tag show_chats_path, remote: true, method: :post do %>
-                  <%= hidden_field_tag :group_id, group.id %>
-                  <%= submit_tag "Chat" %>
+                <%= hidden_field_tag :group_id, group.id %>
+                <%= submit_tag "Chat" %>
                 <% end %>
               </div>
             </div>
-          <% end %>
+            <% end %>
           </li>
         </ul>
       </div>
-
-      <div class="right-section">
+      <div class="right-section" id="new_mess">
         <div class="message mCustomScrollbar" data-mcs-theme="minimal-dark">
           <ul id="chatbot">
             <li class="msg-left">
               <div class="msg-left-sub">
                 <div class="msg-desc" id="chat">
-                  
+
                 </div>
               </div>
             </li>
           </ul>
         </div>
+
         <div id="start_chat">
-          
         </div>
 
       </div>
     </div>
   </div>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <!-- custom scrollbar plugin -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-</body>
-</html>

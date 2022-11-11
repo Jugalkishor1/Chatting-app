@@ -6,6 +6,11 @@ class User < ApplicationRecord
 	has_many :comments
 	has_one :like
 
+	has_many :messagee, foreign_key: :sender_id, class_name: 'Chat'  
+  has_many :senders, through: :messagee
+  has_many :messaged, foreign_key: :group_id, class_name: 'Chat'
+  has_many :groups, through: :messaged
+
 	accepts_nested_attributes_for :addresses
 	
 	validates :name, :presence => {:message => " can't be blank." }

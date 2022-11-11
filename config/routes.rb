@@ -1,5 +1,11 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root 'sessions#new'
+
+  mount Sidekiq::Web => '/sidekiq'
+
+  mount ActionCable.server => '/cable'
 
   get 'search', to: 'users#friends'
 

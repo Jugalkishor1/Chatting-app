@@ -1,3 +1,4 @@
+require "action_cable/engine"
 require_relative "boot"
 
 require "rails/all"
