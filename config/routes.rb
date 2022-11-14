@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   
   post 'group_chats', to: 'chats#group_chats'
 
+  delete 'delete_message/:id', to: 'chats#delete_message', as: "delete_message"
+  
   get 'profile', to: 'posts#profile'
 
   get 'comments', to: 'comments#show_comments'
@@ -48,6 +50,7 @@ Rails.application.routes.draw do
   put 'unlike_post', to: 'likes#unlike_post'
   
   patch 'unlike_post', to: 'likes#unlike_post'
+
 
   resources :users
 

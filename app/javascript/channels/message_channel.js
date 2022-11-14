@@ -16,7 +16,6 @@ document.addEventListener('turbolinks:load', () => {
     received(data) {
       // Called when there's incoming data on the websocket for this channel
       console.log(data.message.m_body)
-      // document.getElementById("god").innerHTML = data.message.m_body
       $("#new_message").append("<h3>" + data.message.m_body + "</h3>");
 
     }

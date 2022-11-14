@@ -1,30 +1,23 @@
 <div class="chat-template">
   <% @chats.each do |chat| %>
+  <ul>
     <% if chat.sender_id == current_user.id %>
-      <ul>
-        <li class="msg-right">
-          <div class="msg-left-sub msg-desc">
-            <span> <h5> <%= chat.m_body %> </h5>
-              <span class="time"> <%= (Time.now.to_date - chat.created_at.to_date).to_i %>  days ago 
-              </span>
-              <h4 class="sender_name"><%= current_user.name.capitalize%></h4> 
-            </span>
-          </div>
-        </li>
-      </ul>
+      <li class="msg-right">
     <% else %>
-      <ul>
-        <li class="msg-left">
-          <div class="msg-left-sub msg-desc">
-            <span> <h5> <%= chat.m_body %> </h5>
-              <span class="time"> <%= (Time.now.to_date - chat.created_at.to_date).to_i %>  days ago 
-              </span>
-              <h4 class="sender_name"><%= @group_name %></h4> 
-            </span>
-          </div>
-        </li>
-      </ul>
+      <li class="msg-left">
     <% end %>
+      <div class="msg-left-sub msg-desc">
+        <div>
+          <h5> <%= chat.m_body %> </h5>
+          <span class="time"> <%= (Time.now.to_date - chat.created_at.to_date).to_i %>  days ago </span>
+          <h4 class="sender_name"><%= chat.sender.name %></h4> 
+          <%= link_to 'Delete', delete_message_path(chat), method: "delete", class: "link"%>
+        </div>
+      </div>
+    </li>
+  </ul>
   <% end %>
-  <h3 id="new_message"></h3>
+  <div id="new_message">
+    
+  </div>
 </div>

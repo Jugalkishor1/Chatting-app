@@ -33,7 +33,7 @@ class ChatsController < ApplicationController
   end
 
   def send_messages
-      @message = Chat.create(m_body: params[:m_body],
+    @message = Chat.create(m_body: params[:m_body],
       sender_id: current_user.id,
       group_id:params[:group_id]
     )
@@ -41,9 +41,15 @@ class ChatsController < ApplicationController
     group_id = @message.group_id 
     
     ActionCable.server.broadcast("message_channel_#{group_id}", {message: message.as_json})
-      respond_to do |format|
-        format.js {SendMessageJob.perform_later(message)}
-      end
+    respond_to do |format|
+      format.js {SendMessageJob.perform_later(message)}
+    end
+  end
+
+  def delete_message
+    @delete_message = Chat.find(params[:id])
+    @delete_message.destroy
+    redirect_to chats_path
   end
 
   private
