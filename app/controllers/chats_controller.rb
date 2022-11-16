@@ -38,9 +38,13 @@ class ChatsController < ApplicationController
       group_id:params[:group_id]
     )
     message = @message
-    group_id = @message.group_id 
-    
-    ActionCable.server.broadcast("message_channel_#{group_id}", {message: message.as_json})
+    ActionCable.server.broadcast("message_channel_#{message.group_id}",
+      {
+        message: message,
+        current_user: current_user.name
+      }
+    )
+
     respond_to do |format|
       format.js {SendMessageJob.perform_later(message)}
     end
