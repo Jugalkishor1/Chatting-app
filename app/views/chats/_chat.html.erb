@@ -8,10 +8,8 @@
     <% end %>
       <div class="msg-left-sub msg-desc">
         <div>
-          <h5> <%= chat.m_body %> </h5>
-          <span class="time"> <%= (Time.now.to_date - chat.created_at.to_date).to_i %>  days ago </span>
-          <h4 class="sender_name"><%= chat.sender.name %></h4> 
-          <%= link_to 'Delete', delete_message_path(chat), method: "delete", class: "link"%>
+          <h5> <%= chat.m_body %><br> <span style="float:right;"> :-<%= chat.sender.name %></span>
+            <br><%= link_to 'Delete', delete_message_path(chat), method: "delete", class: "link"%></h5>
         </div>
       </div>
     </li>
@@ -19,7 +17,7 @@
   <% end %>
   
   <ul>
-    <li>
+    <li class="msg-left">
       <div id="new_message">
       </div>
     </li>

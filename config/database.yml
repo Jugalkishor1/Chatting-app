@@ -9,6 +9,7 @@
 development:
   adapter: postgresql
   encoding: unicode
+  # database: chat_dev 
   database: sample_postgres_development
   pool: 5
   username: postgres

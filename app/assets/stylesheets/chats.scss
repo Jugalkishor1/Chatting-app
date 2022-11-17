@@ -81,10 +81,6 @@ padding: 15px 0px;
 cursor: pointer;
 }
 
-.mCustomScrollBox, .mCSB_container{
-overflow: unset !important;
-}
-
 .left-section ul li.active:before{
 position: absolute;
 content: '';
@@ -247,4 +243,18 @@ h4.sender_name {
     margin-left: 194px;
     font-size: 21px;
     color: #261c1c;
+}
+#new_message h3{
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+div.scrollingDiv
+{
+   overflow:scroll;
+}
+
+span.group-members {
+    font-size: 18px;
+    color: #55555b;
 }
