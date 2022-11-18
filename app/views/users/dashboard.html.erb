@@ -1,3 +1,9 @@
+<% flash.each do |type, msg| %>
+<div class="register-flash">
+  <%= msg %>
+</div>
+<% end %>
+
 <%= render "chats/modal_popup" %>
 
 <h5>Welcome <%= current_user.name.capitalize %>:- </h5>
@@ -53,22 +59,22 @@
                 </a>
                 <p style="line-height: 1.2;">
                   <p> <p> <%= post.content %> </p>
-                    <% @likes = Like.find_by(post_id: post.id) %>
-                    <% if @likes == nil %>
-                      <h5>0</h5>
-                    <% else %>
+                  <% @likes = Like.find_by(post_id: post.id) %>
+                  <% if @likes == nil %>
+                    <h5>0</h5>
+                  <% else %>
                     Likes:- <%= @likes.user_id.count %>
-                    <% end %>
+                  <% end %>
                   
                   <% if @like = Like.where(post_id: post.id).where("user_id @> ?", "{#{current_user.id}}").present? %>
-                  <div class="float-lg-center edit-button">
+                  <div class="float-lg-center edit-button" id="unlike_button-<%= post.id %>">
                     <i class="bi bi-hand-thumbs-up-fill"></i>
                     <%= link_to "Unlike", unlike_post_path(post_id: post.id), remote: true, method: :patch , class: "link"%>
                   </div>
 
                   <% else %>
 
-                  <div class="float-lg-center edit-button" id="<%= post.id %>">
+                  <div class="float-lg-center edit-button" id="like-<%= post.id %>">
                     <div class="like-button">
                       <i class="bi bi-hand-thumbs-up"></i>
                       <%= link_to "Like", likes_path(post_id: post.id, 'user_id[]': current_user.id, current_user_id: current_user.id), remote: true, method: :post, class: "link"%>
@@ -78,13 +84,15 @@
                   <% end %>
                 </p>
 
-                <h5 id="<%= post.user.id %>">  </h5>
 
-                <div class="new_Comment">
-                  <div class="new_comment">
-
-                  </div>
+                <!-- append new comment -->
+                <div id="new_comment-<%= post.id %>">
+                  
                 </div>
+
+                <!-- view all comments -->
+                <h5 id="all_comments-<%= post.id %>"> </h5>
+                
                 <%= form_tag comments_path, remote: true, method: :get do %>
                 <%= hidden_field_tag :post_id, post.id %>
                 <%= hidden_field_tag :user_id, post.user.id %>

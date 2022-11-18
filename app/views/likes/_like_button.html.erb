@@ -1,0 +1,4 @@
+<div class="float-lg-center edit-button" id="like_button-<%= @like.post_id %>">
+  <i class="bi bi-hand-thumbs-up"></i>
+  <%= link_to "Like", likes_path(post_id: @like.post_id, 'user_id[]': current_user.id, current_user_id: current_user.id), remote: true, method: :post, class: "link" %>
+</div>

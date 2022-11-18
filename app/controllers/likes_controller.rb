@@ -18,9 +18,12 @@ class LikesController < ApplicationController
 	end
 
 	def unlike_post
-		like = Like.find_by(post_id: params[:post_id])
-		like.user_id.delete("#{current_user.id}")
-		like.save
-		redirect_to users_dashboard_path
+		@like = Like.find_by(post_id: params[:post_id])
+		@like.user_id.delete("#{current_user.id}")
+		@like.save
+		respond_to do |format|
+			format.html {redirect_to users_dashboard_path}
+			format.js
+		end
 	end
 end

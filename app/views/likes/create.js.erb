@@ -1,1 +1,2 @@
-$("#<%= @post.post_id %>").replaceWith("<%= j render 'unlike', post: @post %>");
+$("#like-<%= @post.post_id %>").replaceWith("<%= j render 'unlike', post: @post %>");
+$("#like_button-<%= @post.post_id %>").replaceWith("<%= j render 'unlike', post: @post %>");

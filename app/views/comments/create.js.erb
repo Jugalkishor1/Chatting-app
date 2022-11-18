@@ -1,2 +1,2 @@
-$(".new_comment").append("<span> <h5> <%= @comment.comment %></h5> </span>");
+$("#new_comment-<%= @comment.post_id %>").append("<span> <h5> <%= @comment.comment %></h5> </span>");
 $('#comment').val('')

@@ -1,2 +1,1 @@
-$('#<%= @user.id %>').html("<%= j render 'all_comments', user: @user %>");
-
+$('#all_comments-<%= @comments.first.post_id %>').html("<%= j render 'all_comments' %>");
