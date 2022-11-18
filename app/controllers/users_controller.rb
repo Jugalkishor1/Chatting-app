@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to(users_dashboard_path, :notice => 'Record not found')
   end
 
   def add_friends

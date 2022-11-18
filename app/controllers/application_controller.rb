@@ -1,9 +1,10 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery prepend: true
 	def current_user
-			# binding.pry
-			@current_user ||= User.find(session[:user_id]) if session[:user_id]
-		end
+		@current_user ||= User.find(session[:user_id]) if session[:user_id]
+		rescue ActiveRecord::RecordNotFound
+			redirect_to root_path and return if @current_user.present?
+	end
 
 	def total_friends
 		friends = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id).where(status: true)
