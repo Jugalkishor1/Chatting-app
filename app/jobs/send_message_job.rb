@@ -3,7 +3,7 @@ class SendMessageJob < ApplicationJob
 
   def perform(message)
     html = "<p>#{message.sender.name}: #{message.m_body}</p>"
-    group_id = [message.sender_id, message.group_id].sort.join("")
+    group_id = [message.group_id].sort.join("")
     ActionCable.server.broadcast("message_channel_#{group_id}", {html: html})
   end
 end

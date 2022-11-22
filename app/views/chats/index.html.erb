@@ -18,37 +18,37 @@
     </div>
   </div>
 
-  <div class="body-section">
+  <div class="body-section" data-current="<%= current_user.id %>">
     <div class="left-section scrollingDiv" data-mcs-theme="minimal-dark">
       <h5> Recent chats :-</h5>
       <ul>
         <% @groups.each do |group| %>
-        <li>
-          <div class="chatList">
-            <div class="desc">
-              <h5><%= head_name = group.group_type == "group" ? group.g_name : get_chat_name(group.grp_members - [current_user.id.to_s]) %>
-              </h5><br>
-                <h4>
-                <% if head_name == group.g_name %>
-                  <% @members = User.where(id: group.grp_members) %>
-                  <% @members.each do |members| %>
-                    <span class="group-members"><%= members.name %></span>
-                    <% if(members != @members.last) %>
-                     <span class="group-members">,</span>
-                     <% end %>
+          <li class="recent-group-<%= group.id %>">
+            <div class="chatList">
+              <div class="desc">
+                <h5><%= head_name = group.group_type == "group" ? group.g_name : get_chat_name(group.grp_members - [current_user.id.to_s]) %>
+                </h5><br>
+                  <h4>
+                  <% if head_name == group.g_name %>
+                    <% @members = User.where(id: group.grp_members) %>
+                    <% @members.each do |members| %>
+                      <span class="group-members"><%= members.name %></span>
+                      <% if(members != @members.last) %>
+                       <span class="group-members">,</span>
+                       <% end %>
+                    <% end %>
                   <% end %>
+                  </h4>
+              </div>
+              <div>
+                <%= form_tag show_chats_path, remote: true, method: :post do %>
+                <%= hidden_field_tag :group_id, group.id %>
+                <%= submit_tag "Chat" %>
                 <% end %>
-                </h4>
+              </div>
             </div>
-            <div>
-              <%= form_tag show_chats_path, remote: true, method: :post do %>
-              <%= hidden_field_tag :group_id, group.id %>
-              <%= submit_tag "Chat" %>
-              <% end %>
-            </div>
-          </div>
-          <% end %>
-        </li>
+            <% end %>
+          </li>
       </ul>
     </div>
     <div class="right-section" id="new_mess">

@@ -1,26 +1,17 @@
-<div class="chat-template">
-  <% @chats.each do |chat| %>
+<div class="chat-template group-<%= @group.id %>" data-group="<%= @group.id %>">
   <ul>
-    <% if chat.sender_id == current_user.id %>
-      <li class="msg-right">
-    <% else %>
-      <li class="msg-left">
-    <% end %>
-      <div class="msg-left-sub msg-desc">
-        <div>
-          <h5> <%= chat.m_body %><br> <span style="float:right;"> :-<%= chat.sender.name %></span>
-            <br><%= link_to 'Delete', delete_message_path(chat), method: "delete", class: "link"%></h5>
+    <% @chats.each do |chat| %>
+      <% class_name = chat.sender_id == current_user.id ? "msg-right" : "msg-left" %>
+      <li class="<%= class_name %>">      
+        <div class="msg-left-sub msg-desc">
+          <h5> <%= chat.m_body %><br>
+          <span style="float:right;"> :-<%= chat.sender.name %></span><br>
+          <% if chat.sender_id == current_user.id %>
+            <%= link_to 'Delete', delete_message_path(chat), method: "delete", class: "link"%>
+          <% end %>
+          </h5>
         </div>
-      </div>
-    </li>
+      </li>
+    <% end %>
   </ul>
-  <% end %>
-  
-  <ul>
-    <li class="msg-left">
-      <div id="new_message">
-      </div>
-    </li>
-  </ul>
-
 </div>
