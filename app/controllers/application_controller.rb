@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::Base
+	before_action :configure_permitted_parameters, if: :devise_controller?
+	# before_action :authenticate_user!
 	protect_from_forgery prepend: true
-	def current_user
-		@current_user ||= User.find(session[:user_id]) if session[:user_id]
-		rescue ActiveRecord::RecordNotFound
-			redirect_to root_path and return if @current_user.present?
-	end
+
+	# def current_user
+	# 	@current_user ||= User.find(session[:user_id]) if session[:user_id]
+	# 	rescue ActiveRecord::RecordNotFound
+	# 		redirect_to root_path and return if @current_user.present?
+	# end
 
 	def total_friends
 		friends = FriendShip.where('user_id= ? OR friend_id= ?', current_user.id, current_user.id).where(status: true)
@@ -19,19 +22,25 @@ class ApplicationController < ActionController::Base
 	def sent_requests
 		@send_requests = FriendShip.where(user_id: current_user.id).where(status: false).includes(:user, :friend).count
 	end
+
+	protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
 	
-	def require_login
-		if current_user.nil?
-			redirect_to new_session_path
-		end
-	end
+	# def require_login
+	# 	if current_user.nil?
+	# 		redirect_to new_session_path
+	# 	end
+	# end
 	
-	before_action :require_login
+	# before_action :require_login
 
 	helper_method :total_friends
 	helper_method :pending_requests
 	
 	helper_method :sent_requests
 
-	helper_method :current_user
+	# helper_method :current_user
 end

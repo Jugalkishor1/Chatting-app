@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
 	# validates :name, presence: true
 	has_many :addresses
 	has_many :friend_ships
@@ -14,8 +18,8 @@ class User < ApplicationRecord
 	accepts_nested_attributes_for :addresses
 	
 	validates :name, :presence => {:message => " can't be blank." }
-	validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-	validates :password, :length => {:within => 3..20}
+	# validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+	# validates :password, :length => {:within => 3..20}
 	
 	scope :all_except, ->(user) { where.not(id: user) }
 

@@ -1,7 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  root 'sessions#new'
+   devise_for :users, controllers: { sessions: 'users/sessions', registrations: "users/registrations" }
+
+  root 'users#index'
 
   mount Sidekiq::Web => '/sidekiq'
 
@@ -52,7 +54,7 @@ Rails.application.routes.draw do
   patch 'unlike_post', to: 'likes#unlike_post'
 
 
-  resources :users
+  resources :users, only: [:show]
 
   resources :posts
 
@@ -62,6 +64,6 @@ Rails.application.routes.draw do
 
   resources :chats, only: [:index]
 
-  resources :sessions, only: [:new, :create, :destroy]
+  # resources :sessions, only: [:new, :create, :destroy]
 
 end

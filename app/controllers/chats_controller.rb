@@ -1,5 +1,5 @@
 class ChatsController < ApplicationController
-  before_action :require_login
+  # before_action :require_login
   
   def index
     @groups = Group.where("grp_members @> ?", "{#{current_user.id}}")
