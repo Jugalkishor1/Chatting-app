@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-	before_action :configure_permitted_parameters, if: :devise_controller?
-	# before_action :authenticate_user!
 	protect_from_forgery prepend: true
 
 	# def current_user
@@ -29,14 +27,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 	
-	# def require_login
-	# 	if current_user.nil?
-	# 		redirect_to new_session_path
-	# 	end
-	# end
-	
-	# before_action :require_login
-
 	helper_method :total_friends
 	helper_method :pending_requests
 	
