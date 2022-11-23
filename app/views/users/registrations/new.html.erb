@@ -1,7 +1,5 @@
 <h2>Sign up</h2>
 
-<%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post, class: "link"%>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
@@ -30,6 +28,9 @@
 
   <div class="actions">
     <%= f.submit "Sign up" %>
+    <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post do %>
+      <%= image_tag 'google.png', width: 136, height: 38, alt: 'Google sign in'%>
+    <% end %>
   </div>
 <% end %>
 

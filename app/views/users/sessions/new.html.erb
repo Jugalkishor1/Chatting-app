@@ -20,6 +20,9 @@
 
   <div class="actions">
     <%= f.submit "Log in" %>
+    <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post do %>
+      <%= image_tag 'google.png', width: 136, height: 38, alt: 'Google sign in'%>
+    <% end %>
   </div>
 <% end %>
 

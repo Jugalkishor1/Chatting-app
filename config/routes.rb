@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   patch 'unlike_post', to: 'likes#unlike_post'
 
 
-  resources :users, only: [:show]
+  resources :users, only: [:index, :show]
 
   resources :posts
 
