@@ -74,3 +74,5 @@ gem 'devise'
 gem 'omniauth', '~> 2.0.2'
 gem "omniauth-google-oauth2"
 gem 'omniauth-rails_csrf_protection'
+
+gem "figaro"
