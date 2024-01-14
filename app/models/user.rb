@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
 	accepts_nested_attributes_for :addresses
 	
-	validates :name, :presence => {:message => " can't be blank." }
+	# validates :name, :presence => {:message => " can't be blank." }
 	# validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 	# validates :password, :length => {:within => 3..20}
 	

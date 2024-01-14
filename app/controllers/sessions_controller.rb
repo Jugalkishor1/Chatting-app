@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  # before_action :require_login, :except=>[:new, :create]
+  before_action :authenticate_user!
+  
   def new
     @user = User.new
   end

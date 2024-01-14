@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-	# before_action :require_login
-
+  before_action :authenticate_user!
+	
 	def create
     @comment = Comment.create(comment: params[:comment],
     	user_id: current_user.id,

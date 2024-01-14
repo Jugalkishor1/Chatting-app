@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :require_login, :except=>[:index, :new, :create]
-
+  before_action :authenticate_user!
+  
   def index
   end
 
@@ -88,7 +88,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    # debugger
     params.require(:user).permit(:name, :email, :password, addresses_attributes: [:id, :Street, :city, :state])
   end
 end

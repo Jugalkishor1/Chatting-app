@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery prepend: true
+	before_action :configure_permitted_parameters, if: :devise_controller?
 
+ # Custom code for current user as i first made login and registration without devise gem
 	# def current_user
 	# 	@current_user ||= User.find(session[:user_id]) if session[:user_id]
 	# 	rescue ActiveRecord::RecordNotFound
@@ -25,6 +27,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+		devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password)}
   end
 	
 	helper_method :total_friends

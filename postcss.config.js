@@ -6,7 +6,6 @@ module.exports = {
       autoprefixer: {
         flexbox: 'no-2009'
       },
-       whitelistPatterns: [/trix-*/],
       stage: 3
     })
   ]

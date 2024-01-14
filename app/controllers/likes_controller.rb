@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+  before_action :authenticate_user!
+	
 	def create
 		@post = Like.find_by(post_id: params[:post_id])
 		if @post.present?

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  # before_action :require_login
+  before_action :authenticate_user!
+  
   def index
     @posts = Post.all 
     respond_to do |format|
