@@ -76,3 +76,6 @@ gem "omniauth-google-oauth2"
 gem 'omniauth-rails_csrf_protection'
 
 gem "figaro"
+gem 'sassc-rails'
+gem 'bootstrap', '~> 5.3.2'
+gem 'jquery-rails'
