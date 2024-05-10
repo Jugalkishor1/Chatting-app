@@ -1,23 +1,20 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-
-#
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  # database: chat_dev 
-  database: demo_database
-  # database: sample_postgres_development
-  pool: 5
+  host: localhost
   username: postgres
   password: postgres
-  host: localhost
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+development:
+  <<: *default
+  database: chatting-app
 
+test:
+  <<: *default
+  database: chatting-app-test
+
+production:
+  <<: *default
+  
