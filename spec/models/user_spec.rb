@@ -36,4 +36,19 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid
     expect(user.errors[:email]).to include("has already been taken")
   end
+
+  describe '.from_omniauth' do
+    let(:access_token) { double('access_token', info: { 'email' => 'test@example.com', 'name' => 'Test User' }) }
+
+    context 'when a user with the provided email does not exist' do
+      it 'creates a new user' do
+        expect {
+          user = User.from_omniauth(access_token)
+          expect(user).to be_persisted
+          expect(user.email).to eq('test@example.com')
+          expect(user.name).to eq('Test User')
+        }.to change(User, :count).by(1)
+      end
+    end  
+  end
 end
