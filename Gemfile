@@ -71,6 +71,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
   gem 'simplecov', require: false
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
